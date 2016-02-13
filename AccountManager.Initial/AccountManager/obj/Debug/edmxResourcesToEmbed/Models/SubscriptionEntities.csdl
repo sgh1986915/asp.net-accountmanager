@@ -1,0 +1,372 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="SubscriptionModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Database">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="LstOltpUpdateDate" Type="DateTime" Precision="3" />
+    <Property Name="LstDataMartUpdateDate" Type="DateTime" Precision="3" />
+    <Property Name="LstUpdateError" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Code" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="DbGroup" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="EnterpriseId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="ServerDatabase" Relationship="Self.FK_ServerDatabase_Database" FromRole="Database" ToRole="ServerDatabase" />
+    <NavigationProperty Name="Enterprise" Relationship="SubscriptionModel.FK_Database_DataCenter" FromRole="Database" ToRole="Enterprise" />
+  </EntityType>
+  <EntityType Name="Server">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="LastSeenDate" Type="DateTime" Precision="3" />
+    <Property Name="Failed" Type="Int32" Nullable="false" />
+    <Property Name="Priority" Type="Int32" Nullable="false" />
+    <Property Name="Enabled" Type="Boolean" Nullable="false" />
+    <Property Name="EnterpriseId" Type="Int32" />
+    <Property Name="Url" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="ServerDatabase" Relationship="Self.FK_ServerDatabase_Server" FromRole="Server" ToRole="ServerDatabase" />
+    <NavigationProperty Name="Enterprise" Relationship="SubscriptionModel.FK_Server_Enterprise" FromRole="Server" ToRole="Enterprise" />
+  </EntityType>
+  <EntityType Name="ServerDatabase">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ServerId" Type="Int32" Nullable="false" />
+    <Property Name="DatabaseId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Database" Relationship="Self.FK_ServerDatabase_Database" FromRole="ServerDatabase" ToRole="Database" />
+    <NavigationProperty Name="Server" Relationship="Self.FK_ServerDatabase_Server" FromRole="ServerDatabase" ToRole="Server" />
+  </EntityType>
+  <EntityType Name="UserEnterprise">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="EnterpriseId" Type="Int32" Nullable="false" />
+    <Property Name="AdminRole" Type="Boolean" Nullable="false" />
+    <Property Name="DataLoaderRole" Type="Boolean" Nullable="false" />
+    <Property Name="ReportViewerRole" Type="Boolean" Nullable="false" />
+    <Property Name="DataMartLoaderRole" Type="Boolean" Nullable="false" />
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Enterprise" Relationship="SubscriptionModel.FK_Enterprise_UserEnterprise" FromRole="UserEnterprise" ToRole="Enterprise" />
+    <NavigationProperty Name="User" Relationship="SubscriptionModel.FK_User_UserEnterprise" FromRole="UserEnterprise" ToRole="User" />
+  </EntityType>
+  <Association Name="FK_ServerDatabase_Database">
+    <End Role="Database" Type="Self.Database" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="ServerDatabase" Type="Self.ServerDatabase" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Database">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ServerDatabase">
+        <PropertyRef Name="DatabaseId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ServerDatabase_Server">
+    <End Role="Server" Type="Self.Server" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="ServerDatabase" Type="Self.ServerDatabase" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Server">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ServerDatabase">
+        <PropertyRef Name="ServerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="SubscriptionEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Database" EntityType="Self.Database" />
+    <EntitySet Name="Server" EntityType="Self.Server" />
+    <EntitySet Name="ServerDatabase" EntityType="Self.ServerDatabase" />
+    <EntitySet Name="UserEnterprise" EntityType="Self.UserEnterprise" />
+    <AssociationSet Name="FK_ServerDatabase_Database" Association="Self.FK_ServerDatabase_Database">
+      <End Role="Database" EntitySet="Database" />
+      <End Role="ServerDatabase" EntitySet="ServerDatabase" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ServerDatabase_Server" Association="Self.FK_ServerDatabase_Server">
+      <End Role="Server" EntitySet="Server" />
+      <End Role="ServerDatabase" EntitySet="ServerDatabase" />
+    </AssociationSet>
+    <EntitySet Name="Enterprise" EntityType="SubscriptionModel.Enterprise" />
+    <EntitySet Name="User" EntityType="SubscriptionModel.User" />
+    <AssociationSet Name="FK_Database_DataCenter" Association="SubscriptionModel.FK_Database_DataCenter">
+      <End Role="Enterprise" EntitySet="Enterprise" />
+      <End Role="Database" EntitySet="Database" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DataCenter_UserProfile" Association="SubscriptionModel.FK_DataCenter_UserProfile">
+      <End Role="User" EntitySet="User" />
+      <End Role="Enterprise" EntitySet="Enterprise" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Enterprise_Reseller" Association="SubscriptionModel.FK_Enterprise_Reseller">
+      <End Role="User" EntitySet="User" />
+      <End Role="Enterprise" EntitySet="Enterprise" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Enterprise_UserEnterprise" Association="SubscriptionModel.FK_Enterprise_UserEnterprise">
+      <End Role="Enterprise" EntitySet="Enterprise" />
+      <End Role="UserEnterprise" EntitySet="UserEnterprise" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Server_Enterprise" Association="SubscriptionModel.FK_Server_Enterprise">
+      <End Role="Enterprise" EntitySet="Enterprise" />
+      <End Role="Server" EntitySet="Server" />
+    </AssociationSet>
+    <AssociationSet Name="FK_User_UserEnterprise" Association="SubscriptionModel.FK_User_UserEnterprise">
+      <End Role="User" EntitySet="User" />
+      <End Role="UserEnterprise" EntitySet="UserEnterprise" />
+    </AssociationSet>
+    <EntitySet Name="UserAddress" EntityType="SubscriptionModel.UserAddress" />
+    <AssociationSet Name="FK_UserAddress_ToTable" Association="SubscriptionModel.FK_UserAddress_ToTable">
+      <End Role="User" EntitySet="User" />
+      <End Role="UserAddress" EntitySet="UserAddress" />
+    </AssociationSet>
+    <EntitySet Name="Order" EntityType="SubscriptionModel.Order" />
+    <EntitySet Name="Payment" EntityType="SubscriptionModel.Payment" />
+    <AssociationSet Name="FK_Order_ToOwner" Association="SubscriptionModel.FK_Order_ToOwner">
+      <End Role="User" EntitySet="User" />
+      <End Role="Order" EntitySet="Order" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Order_ToReseller" Association="SubscriptionModel.FK_Order_ToReseller">
+      <End Role="User" EntitySet="User" />
+      <End Role="Order" EntitySet="Order" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Payment_ToOrder" Association="SubscriptionModel.FK_Payment_ToOrder">
+      <End Role="Order" EntitySet="Order" />
+      <End Role="Payment" EntitySet="Payment" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Enterprise">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+    <Property Name="Profile" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+    <Property Name="MaxFemales" Type="Int32" />
+    <Property Name="Config" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Culture" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="OwnerUserId" Type="Int32" Nullable="false" />
+    <Property Name="SharedFileSystemId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="EnterpriseCode" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="true" />
+    <Property Name="DefaultServerId" Type="Int32" />
+    <Property Name="NextRenewalDate" Type="DateTime" Precision="0" />
+    <Property Name="MaxWebUsers" Type="Int32" Nullable="false" />
+    <Property Name="MaxRemoteAppUsers" Type="Int32" Nullable="false" />
+    <Property Name="ManagedWebServer" Type="Boolean" Nullable="false" />
+    <Property Name="Tier" Type="Int32" Nullable="false" />
+    <Property Name="ConsultantLicenses" Type="Int32" Nullable="false" />
+    <Property Name="DesktopLicenses" Type="Int32" Nullable="false" />
+    <Property Name="MobileLicenses" Type="Int32" Nullable="false" />
+    <Property Name="ServerAndDesktopLicenses" Type="Int32" Nullable="false" />
+    <Property Name="ResellerUserId" Type="Int32" />
+    <NavigationProperty Name="Database" Relationship="SubscriptionModel.FK_Database_DataCenter" FromRole="Enterprise" ToRole="Database" />
+    <NavigationProperty Name="User" Relationship="SubscriptionModel.FK_DataCenter_UserProfile" FromRole="Enterprise" ToRole="User" />
+    <NavigationProperty Name="User1" Relationship="SubscriptionModel.FK_Enterprise_Reseller" FromRole="Enterprise" ToRole="User" />
+    <NavigationProperty Name="UserEnterprise" Relationship="SubscriptionModel.FK_Enterprise_UserEnterprise" FromRole="Enterprise" ToRole="UserEnterprise" />
+    <NavigationProperty Name="Server" Relationship="SubscriptionModel.FK_Server_Enterprise" FromRole="Enterprise" ToRole="Server" />
+    <Property Name="CreationDate" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserName" Type="String" Nullable="false" MaxLength="56" FixedLength="false" Unicode="true" />
+    <Property Name="CreationDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Enterprise" Relationship="SubscriptionModel.FK_DataCenter_UserProfile" FromRole="User" ToRole="Enterprise" />
+    <NavigationProperty Name="Enterprise1" Relationship="SubscriptionModel.FK_Enterprise_Reseller" FromRole="User" ToRole="Enterprise" />
+    <NavigationProperty Name="UserEnterprise" Relationship="SubscriptionModel.FK_User_UserEnterprise" FromRole="User" ToRole="UserEnterprise" />
+    <NavigationProperty Name="UserAddress" Relationship="SubscriptionModel.FK_UserAddress_ToTable" FromRole="User" ToRole="UserAddress" />
+    <NavigationProperty Name="Order" Relationship="SubscriptionModel.FK_Order_ToOwner" FromRole="User" ToRole="Order" />
+    <NavigationProperty Name="Order1" Relationship="SubscriptionModel.FK_Order_ToReseller" FromRole="User" ToRole="Order" />
+  </EntityType>
+  <Association Name="FK_Database_DataCenter">
+    <End Type="SubscriptionModel.Enterprise" Role="Enterprise" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="SubscriptionModel.Database" Role="Database" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Enterprise">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Database">
+        <PropertyRef Name="EnterpriseId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DataCenter_UserProfile">
+    <End Type="SubscriptionModel.User" Role="User" Multiplicity="1" />
+    <End Type="SubscriptionModel.Enterprise" Role="Enterprise" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Enterprise">
+        <PropertyRef Name="OwnerUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Enterprise_Reseller">
+    <End Type="SubscriptionModel.User" Role="User" Multiplicity="0..1" />
+    <End Type="SubscriptionModel.Enterprise" Role="Enterprise" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Enterprise">
+        <PropertyRef Name="ResellerUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Enterprise_UserEnterprise">
+    <End Type="SubscriptionModel.Enterprise" Role="Enterprise" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="SubscriptionModel.UserEnterprise" Role="UserEnterprise" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Enterprise">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserEnterprise">
+        <PropertyRef Name="EnterpriseId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Server_Enterprise">
+    <End Type="SubscriptionModel.Enterprise" Role="Enterprise" Multiplicity="0..1" />
+    <End Type="SubscriptionModel.Server" Role="Server" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Enterprise">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Server">
+        <PropertyRef Name="EnterpriseId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_User_UserEnterprise">
+    <End Type="SubscriptionModel.User" Role="User" Multiplicity="1" />
+    <End Type="SubscriptionModel.UserEnterprise" Role="UserEnterprise" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="UserEnterprise">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="UserAddress">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <Property Name="AdressLine1" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+    <Property Name="AdressLine2" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+    <Property Name="City" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+    <Property Name="State" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+    <Property Name="ZIP" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="Country" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
+    <Property Name="Phone" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+    <Property Name="BillingName" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+    <Property Name="BillingAdressLine1" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+    <Property Name="BillingAdressLine2" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+    <Property Name="BillingCity" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+    <Property Name="BillingState" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+    <Property Name="BillingZIP" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="BillingCountry" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
+    <Property Name="TaxId" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="User" Relationship="SubscriptionModel.FK_UserAddress_ToTable" FromRole="UserAddress" ToRole="User" />
+    <Property Name="Name" Type="String" MaxLength="60" FixedLength="true" Unicode="true" />
+  </EntityType>
+  <Association Name="FK_UserAddress_ToTable">
+    <End Type="SubscriptionModel.User" Role="User" Multiplicity="1" />
+    <End Type="SubscriptionModel.UserAddress" Role="UserAddress" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="UserAddress">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Order">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="Owner" Type="Int32" Nullable="false" />
+    <Property Name="Reseller" Type="Int32" />
+    <Property Name="BillingName" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+    <Property Name="BillingAdressLine1" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+    <Property Name="BillingAdressLine2" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+    <Property Name="BillingCity" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+    <Property Name="BillingState" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+    <Property Name="BillingZIP" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="BillingCountry" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
+    <Property Name="TaxId" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Mod" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Price" Type="Decimal" Precision="10" Scale="4" />
+    <Property Name="Status" Type="Int32" Nullable="false" />
+    <Property Name="Detail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="User" Relationship="SubscriptionModel.FK_Order_ToOwner" FromRole="Order" ToRole="User" />
+    <NavigationProperty Name="User1" Relationship="SubscriptionModel.FK_Order_ToReseller" FromRole="Order" ToRole="User" />
+    <NavigationProperty Name="Payment" Relationship="SubscriptionModel.FK_Payment_ToOrder" FromRole="Order" ToRole="Payment" />
+  </EntityType>
+  <EntityType Name="Payment">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="PaymentType" Type="Int32" Nullable="false" />
+    <Property Name="OrderId" Type="Int32" />
+    <Property Name="InvoiceDate" Type="DateTime" Precision="0" />
+    <Property Name="InvoiceNumber" Type="String" MaxLength="12" FixedLength="true" Unicode="true" />
+    <Property Name="Amount" Type="Decimal" Nullable="false" Precision="10" Scale="4" />
+    <Property Name="EndingBalance" Type="Decimal" Nullable="false" Precision="10" Scale="4" />
+    <NavigationProperty Name="Order" Relationship="SubscriptionModel.FK_Payment_ToOrder" FromRole="Payment" ToRole="Order" />
+  </EntityType>
+  <Association Name="FK_Order_ToOwner">
+    <End Type="SubscriptionModel.User" Role="User" Multiplicity="1" />
+    <End Type="SubscriptionModel.Order" Role="Order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Order">
+        <PropertyRef Name="Owner" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Order_ToReseller">
+    <End Type="SubscriptionModel.User" Role="User" Multiplicity="0..1" />
+    <End Type="SubscriptionModel.Order" Role="Order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Order">
+        <PropertyRef Name="Reseller" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Payment_ToOrder">
+    <End Type="SubscriptionModel.Order" Role="Order" Multiplicity="0..1" />
+    <End Type="SubscriptionModel.Payment" Role="Payment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Order">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Payment">
+        <PropertyRef Name="OrderId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

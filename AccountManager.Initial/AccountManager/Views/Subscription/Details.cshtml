@@ -1,0 +1,170 @@
+﻿@model AccountManager.Models.Enterprise
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Enterprise</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Profile)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Profile)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MaxFemales)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MaxFemales)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Config)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Config)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Culture)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Culture)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SharedFileSystemId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SharedFileSystemId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EnterpriseCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EnterpriseCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DefaultServerId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DefaultServerId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NextRenewalDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NextRenewalDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MaxWebUsers)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MaxWebUsers)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MaxRemoteAppUsers)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MaxRemoteAppUsers)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ManagedWebServer)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ManagedWebServer)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Tier)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tier)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ConsultantLicenses)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ConsultantLicenses)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DesktopLicenses)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DesktopLicenses)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MobileLicenses)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MobileLicenses)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ServerAndDesktopLicenses)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ServerAndDesktopLicenses)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.User.UserName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.User.UserName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.User1.UserName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.User1.UserName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

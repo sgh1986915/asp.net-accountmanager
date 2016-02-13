@@ -1,0 +1,148 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="SubscriptionModelStoreContainer" CdmEntityContainer="SubscriptionEntities">
+    <EntitySetMapping Name="Database">
+      <EntityTypeMapping TypeName="SubscriptionModel.Database">
+        <MappingFragment StoreEntitySet="Database">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="LstOltpUpdateDate" ColumnName="LstOltpUpdateDate" />
+          <ScalarProperty Name="LstDataMartUpdateDate" ColumnName="LstDataMartUpdateDate" />
+          <ScalarProperty Name="LstUpdateError" ColumnName="LstUpdateError" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="DbGroup" ColumnName="DbGroup" />
+          <ScalarProperty Name="EnterpriseId" ColumnName="EnterpriseId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Server">
+      <EntityTypeMapping TypeName="SubscriptionModel.Server">
+        <MappingFragment StoreEntitySet="Server">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="LastSeenDate" ColumnName="LastSeenDate" />
+          <ScalarProperty Name="Failed" ColumnName="Failed" />
+          <ScalarProperty Name="Priority" ColumnName="Priority" />
+          <ScalarProperty Name="Enabled" ColumnName="Enabled" />
+          <ScalarProperty Name="EnterpriseId" ColumnName="EnterpriseId" />
+          <ScalarProperty Name="Url" ColumnName="Url" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ServerDatabase">
+      <EntityTypeMapping TypeName="SubscriptionModel.ServerDatabase">
+        <MappingFragment StoreEntitySet="ServerDatabase">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ServerId" ColumnName="ServerId" />
+          <ScalarProperty Name="DatabaseId" ColumnName="DatabaseId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserEnterprise">
+      <EntityTypeMapping TypeName="SubscriptionModel.UserEnterprise">
+        <MappingFragment StoreEntitySet="UserEnterprise">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="EnterpriseId" ColumnName="EnterpriseId" />
+          <ScalarProperty Name="AdminRole" ColumnName="AdminRole" />
+          <ScalarProperty Name="DataLoaderRole" ColumnName="DataLoaderRole" />
+          <ScalarProperty Name="ReportViewerRole" ColumnName="ReportViewerRole" />
+          <ScalarProperty Name="DataMartLoaderRole" ColumnName="DataMartLoaderRole" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Enterprise">
+      <EntityTypeMapping TypeName="SubscriptionModel.Enterprise">
+        <MappingFragment StoreEntitySet="Enterprise">
+          <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+          <ScalarProperty Name="ResellerUserId" ColumnName="ResellerUserId" />
+          <ScalarProperty Name="ServerAndDesktopLicenses" ColumnName="ServerAndDesktopLicenses" />
+          <ScalarProperty Name="MobileLicenses" ColumnName="MobileLicenses" />
+          <ScalarProperty Name="DesktopLicenses" ColumnName="DesktopLicenses" />
+          <ScalarProperty Name="ConsultantLicenses" ColumnName="ConsultantLicenses" />
+          <ScalarProperty Name="Tier" ColumnName="Tier" />
+          <ScalarProperty Name="ManagedWebServer" ColumnName="ManagedWebServer" />
+          <ScalarProperty Name="MaxRemoteAppUsers" ColumnName="MaxRemoteAppUsers" />
+          <ScalarProperty Name="MaxWebUsers" ColumnName="MaxWebUsers" />
+          <ScalarProperty Name="NextRenewalDate" ColumnName="NextRenewalDate" />
+          <ScalarProperty Name="DefaultServerId" ColumnName="DefaultServerId" />
+          <ScalarProperty Name="EnterpriseCode" ColumnName="EnterpriseCode" />
+          <ScalarProperty Name="SharedFileSystemId" ColumnName="SharedFileSystemId" />
+          <ScalarProperty Name="OwnerUserId" ColumnName="OwnerUserId" />
+          <ScalarProperty Name="Culture" ColumnName="Culture" />
+          <ScalarProperty Name="Config" ColumnName="Config" />
+          <ScalarProperty Name="MaxFemales" ColumnName="MaxFemales" />
+          <ScalarProperty Name="Profile" ColumnName="Profile" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="User">
+      <EntityTypeMapping TypeName="SubscriptionModel.User">
+        <MappingFragment StoreEntitySet="User">
+          <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserAddress">
+      <EntityTypeMapping TypeName="SubscriptionModel.UserAddress">
+        <MappingFragment StoreEntitySet="UserAddress">
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="TaxId" ColumnName="TaxId" />
+          <ScalarProperty Name="BillingCountry" ColumnName="BillingCountry" />
+          <ScalarProperty Name="BillingZIP" ColumnName="BillingZIP" />
+          <ScalarProperty Name="BillingState" ColumnName="BillingState" />
+          <ScalarProperty Name="BillingCity" ColumnName="BillingCity" />
+          <ScalarProperty Name="BillingAdressLine2" ColumnName="BillingAdressLine2" />
+          <ScalarProperty Name="BillingAdressLine1" ColumnName="BillingAdressLine1" />
+          <ScalarProperty Name="BillingName" ColumnName="BillingName" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Country" ColumnName="Country" />
+          <ScalarProperty Name="ZIP" ColumnName="ZIP" />
+          <ScalarProperty Name="State" ColumnName="State" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="AdressLine2" ColumnName="AdressLine2" />
+          <ScalarProperty Name="AdressLine1" ColumnName="AdressLine1" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Order">
+      <EntityTypeMapping TypeName="SubscriptionModel.Order">
+        <MappingFragment StoreEntitySet="Order">
+          <ScalarProperty Name="Detail" ColumnName="Detail" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Mod" ColumnName="Mod" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="TaxId" ColumnName="TaxId" />
+          <ScalarProperty Name="BillingCountry" ColumnName="BillingCountry" />
+          <ScalarProperty Name="BillingZIP" ColumnName="BillingZIP" />
+          <ScalarProperty Name="BillingState" ColumnName="BillingState" />
+          <ScalarProperty Name="BillingCity" ColumnName="BillingCity" />
+          <ScalarProperty Name="BillingAdressLine2" ColumnName="BillingAdressLine2" />
+          <ScalarProperty Name="BillingAdressLine1" ColumnName="BillingAdressLine1" />
+          <ScalarProperty Name="BillingName" ColumnName="BillingName" />
+          <ScalarProperty Name="Reseller" ColumnName="Reseller" />
+          <ScalarProperty Name="Owner" ColumnName="Owner" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Payment">
+      <EntityTypeMapping TypeName="SubscriptionModel.Payment">
+        <MappingFragment StoreEntitySet="Payment">
+          <ScalarProperty Name="EndingBalance" ColumnName="EndingBalance" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="InvoiceNumber" ColumnName="InvoiceNumber" />
+          <ScalarProperty Name="InvoiceDate" ColumnName="InvoiceDate" />
+          <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+          <ScalarProperty Name="PaymentType" ColumnName="PaymentType" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

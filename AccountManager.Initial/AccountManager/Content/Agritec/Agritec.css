@@ -1,0 +1,41 @@
+﻿
+
+
+.form-inline .form-group{
+    margin-left: 0;
+    margin-right: 0;
+}
+
+
+
+.table tbody tr > td.birth { background-color: #b5f69a; }
+.table tbody tr > td.pwdeaths { color: #b0576c; }
+.table tbody tr > td.matings { color: #006b82; }
+
+
+.form-compacted-group
+{
+    margin-bottom: 2px;
+}
+
+/* Logo */
+.navbar-brand {
+  font: 0/0 a !important;
+  color: transparent !important;
+  text-shadow: none !important;
+  background-color: transparent !important;
+  border: 0 !important;
+  background: url("../Content/Images/logo.png") no-repeat center center;
+  height: 40px;
+  width: 121px;
+}
+
+.focusedform .brand{display:block;padding-bottom:40px;margin:0 auto;width:150px}
+
+.focusedform .verticalcenter {
+    left: 50%;
+    margin-left: -200px;
+    margin-top: -250px;
+    position: absolute;
+    top: 42%;
+}

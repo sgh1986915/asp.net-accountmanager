@@ -1,0 +1,29 @@
+﻿@* Plantilla neta, sense menus, per fer forms com login, register, etc.*@
+
+<!DOCTYPE html>
+<html lang="en" @*FaunatecOnline.i18n.CultureHelper.GetCurrentNeutralCulture() *@ >
+<head>
+    <meta charset=" utf-8">
+<title>@ViewBag.Title</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="description" content="Agritec Software">
+<meta name="author" content="Agritec Software">
+
+<!-- <link href="~/Content/less/styles.less" rel="stylesheet/less" media="all"> -->
+<!--<link rel="stylesheet" href="~/Content/css/styles.min.css?=113">-->
+@Styles.Render("~/Bundles/Css")
+
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600' rel='stylesheet' type='text/css'>
+
+<!-- <script type="text/javascript" src="~/Content/js/less.js"></script>-->
+</head>
+<body class="focusedform">
+
+    @RenderBody()
+
+
+    @Scripts.Render("~/Bundles/Core")
+</body>
+</html>

@@ -1,0 +1,348 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="SubscriptionModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Database">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="LstOltpUpdateDate" Type="datetime" />
+    <Property Name="LstDataMartUpdateDate" Type="datetime" />
+    <Property Name="LstUpdateError" Type="varchar" MaxLength="50" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="Code" Type="nvarchar" MaxLength="20" />
+    <Property Name="DbGroup" Type="nvarchar" MaxLength="20" />
+    <Property Name="EnterpriseId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Enterprise">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="60" />
+    <Property Name="Profile" Type="varchar" MaxLength="3" />
+    <Property Name="MaxFemales" Type="int" />
+    <Property Name="Config" Type="varchar" MaxLength="50" />
+    <Property Name="Culture" Type="varchar" MaxLength="50" />
+    <Property Name="OwnerUserId" Type="int" Nullable="false" />
+    <Property Name="SharedFileSystemId" Type="varchar" MaxLength="50" />
+    <Property Name="EnterpriseCode" Type="nvarchar" MaxLength="12" Nullable="false" />
+    <Property Name="DefaultServerId" Type="int" />
+    <Property Name="NextRenewalDate" Type="date" />
+    <Property Name="MaxWebUsers" Type="int" Nullable="false" />
+    <Property Name="MaxRemoteAppUsers" Type="int" Nullable="false" />
+    <Property Name="ManagedWebServer" Type="bit" Nullable="false" />
+    <Property Name="Tier" Type="int" Nullable="false" />
+    <Property Name="ConsultantLicenses" Type="int" Nullable="false" />
+    <Property Name="DesktopLicenses" Type="int" Nullable="false" />
+    <Property Name="MobileLicenses" Type="int" Nullable="false" />
+    <Property Name="ServerAndDesktopLicenses" Type="int" Nullable="false" />
+    <Property Name="ResellerUserId" Type="int" />
+    <Property Name="CreationDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Order">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Owner" Type="int" Nullable="false" />
+    <Property Name="Reseller" Type="int" />
+    <Property Name="BillingName" Type="nvarchar" MaxLength="60" />
+    <Property Name="BillingAdressLine1" Type="nvarchar" MaxLength="60" />
+    <Property Name="BillingAdressLine2" Type="nvarchar" MaxLength="60" />
+    <Property Name="BillingCity" Type="nvarchar" MaxLength="60" />
+    <Property Name="BillingState" Type="nvarchar" MaxLength="60" />
+    <Property Name="BillingZIP" Type="nvarchar" MaxLength="10" />
+    <Property Name="BillingCountry" Type="nchar" MaxLength="2" />
+    <Property Name="TaxId" Type="nvarchar" MaxLength="15" />
+    <Property Name="Description" Type="nvarchar(max)" />
+    <Property Name="Mod" Type="nvarchar(max)" />
+    <Property Name="Price" Type="smallmoney" />
+    <Property Name="Status" Type="int" Nullable="false" />
+    <Property Name="Detail" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="Payment">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="PaymentType" Type="int" Nullable="false" />
+    <Property Name="OrderId" Type="int" />
+    <Property Name="InvoiceDate" Type="date" />
+    <Property Name="InvoiceNumber" Type="nchar" MaxLength="12" />
+    <Property Name="Amount" Type="smallmoney" Nullable="false" />
+    <Property Name="EndingBalance" Type="smallmoney" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Server">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="LastSeenDate" Type="datetime" />
+    <Property Name="Failed" Type="int" Nullable="false" />
+    <Property Name="Priority" Type="int" Nullable="false" />
+    <Property Name="Enabled" Type="bit" Nullable="false" />
+    <Property Name="EnterpriseId" Type="int" />
+    <Property Name="Url" Type="nvarchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="ServerDatabase">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ServerId" Type="int" Nullable="false" />
+    <Property Name="DatabaseId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar" MaxLength="56" Nullable="false" />
+    <Property Name="CreationDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="UserAddress">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="AdressLine1" Type="nvarchar" MaxLength="60" />
+    <Property Name="AdressLine2" Type="nvarchar" MaxLength="60" />
+    <Property Name="City" Type="nvarchar" MaxLength="60" />
+    <Property Name="State" Type="nvarchar" MaxLength="60" />
+    <Property Name="ZIP" Type="nvarchar" MaxLength="10" />
+    <Property Name="Country" Type="nchar" MaxLength="2" />
+    <Property Name="Phone" Type="nvarchar" MaxLength="15" />
+    <Property Name="BillingName" Type="nvarchar" MaxLength="60" />
+    <Property Name="BillingAdressLine1" Type="nvarchar" MaxLength="60" />
+    <Property Name="BillingAdressLine2" Type="nvarchar" MaxLength="60" />
+    <Property Name="BillingCity" Type="nvarchar" MaxLength="60" />
+    <Property Name="BillingState" Type="nvarchar" MaxLength="60" />
+    <Property Name="BillingZIP" Type="nvarchar" MaxLength="10" />
+    <Property Name="BillingCountry" Type="nchar" MaxLength="2" />
+    <Property Name="TaxId" Type="nvarchar" MaxLength="15" />
+    <Property Name="Name" Type="nchar" MaxLength="60" />
+  </EntityType>
+  <EntityType Name="UserEnterprise">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EnterpriseId" Type="int" Nullable="false" />
+    <Property Name="AdminRole" Type="bit" Nullable="false" />
+    <Property Name="DataLoaderRole" Type="bit" Nullable="false" />
+    <Property Name="ReportViewerRole" Type="bit" Nullable="false" />
+    <Property Name="DataMartLoaderRole" Type="bit" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Database_DataCenter">
+    <End Role="Enterprise" Type="Self.Enterprise" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Database" Type="Self.Database" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Enterprise">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Database">
+        <PropertyRef Name="EnterpriseId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DataCenter_UserProfile">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="Enterprise" Type="Self.Enterprise" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Enterprise">
+        <PropertyRef Name="OwnerUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Enterprise_Reseller">
+    <End Role="User" Type="Self.User" Multiplicity="0..1" />
+    <End Role="Enterprise" Type="Self.Enterprise" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Enterprise">
+        <PropertyRef Name="ResellerUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Enterprise_UserEnterprise">
+    <End Role="Enterprise" Type="Self.Enterprise" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="UserEnterprise" Type="Self.UserEnterprise" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Enterprise">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserEnterprise">
+        <PropertyRef Name="EnterpriseId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Order_ToOwner">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="Order" Type="Self.Order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Order">
+        <PropertyRef Name="Owner" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Order_ToReseller">
+    <End Role="User" Type="Self.User" Multiplicity="0..1" />
+    <End Role="Order" Type="Self.Order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Order">
+        <PropertyRef Name="Reseller" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Payment_ToOrder">
+    <End Role="Order" Type="Self.Order" Multiplicity="0..1" />
+    <End Role="Payment" Type="Self.Payment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Order">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Payment">
+        <PropertyRef Name="OrderId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Server_Enterprise">
+    <End Role="Enterprise" Type="Self.Enterprise" Multiplicity="0..1" />
+    <End Role="Server" Type="Self.Server" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Enterprise">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Server">
+        <PropertyRef Name="EnterpriseId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ServerDatabase_Database">
+    <End Role="Database" Type="Self.Database" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="ServerDatabase" Type="Self.ServerDatabase" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Database">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ServerDatabase">
+        <PropertyRef Name="DatabaseId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ServerDatabase_Server">
+    <End Role="Server" Type="Self.Server" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="ServerDatabase" Type="Self.ServerDatabase" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Server">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ServerDatabase">
+        <PropertyRef Name="ServerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_User_UserEnterprise">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="UserEnterprise" Type="Self.UserEnterprise" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="UserEnterprise">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserAddress_ToTable">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="UserAddress" Type="Self.UserAddress" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="UserAddress">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="SubscriptionModelStoreContainer">
+    <EntitySet Name="Database" EntityType="Self.Database" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Enterprise" EntityType="Self.Enterprise" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Order" EntityType="Self.Order" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Payment" EntityType="Self.Payment" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Server" EntityType="Self.Server" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ServerDatabase" EntityType="Self.ServerDatabase" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserAddress" EntityType="Self.UserAddress" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserEnterprise" EntityType="Self.UserEnterprise" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Database_DataCenter" Association="Self.FK_Database_DataCenter">
+      <End Role="Enterprise" EntitySet="Enterprise" />
+      <End Role="Database" EntitySet="Database" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DataCenter_UserProfile" Association="Self.FK_DataCenter_UserProfile">
+      <End Role="User" EntitySet="User" />
+      <End Role="Enterprise" EntitySet="Enterprise" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Enterprise_Reseller" Association="Self.FK_Enterprise_Reseller">
+      <End Role="User" EntitySet="User" />
+      <End Role="Enterprise" EntitySet="Enterprise" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Enterprise_UserEnterprise" Association="Self.FK_Enterprise_UserEnterprise">
+      <End Role="Enterprise" EntitySet="Enterprise" />
+      <End Role="UserEnterprise" EntitySet="UserEnterprise" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Order_ToOwner" Association="Self.FK_Order_ToOwner">
+      <End Role="User" EntitySet="User" />
+      <End Role="Order" EntitySet="Order" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Order_ToReseller" Association="Self.FK_Order_ToReseller">
+      <End Role="User" EntitySet="User" />
+      <End Role="Order" EntitySet="Order" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Payment_ToOrder" Association="Self.FK_Payment_ToOrder">
+      <End Role="Order" EntitySet="Order" />
+      <End Role="Payment" EntitySet="Payment" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Server_Enterprise" Association="Self.FK_Server_Enterprise">
+      <End Role="Enterprise" EntitySet="Enterprise" />
+      <End Role="Server" EntitySet="Server" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ServerDatabase_Database" Association="Self.FK_ServerDatabase_Database">
+      <End Role="Database" EntitySet="Database" />
+      <End Role="ServerDatabase" EntitySet="ServerDatabase" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ServerDatabase_Server" Association="Self.FK_ServerDatabase_Server">
+      <End Role="Server" EntitySet="Server" />
+      <End Role="ServerDatabase" EntitySet="ServerDatabase" />
+    </AssociationSet>
+    <AssociationSet Name="FK_User_UserEnterprise" Association="Self.FK_User_UserEnterprise">
+      <End Role="User" EntitySet="User" />
+      <End Role="UserEnterprise" EntitySet="UserEnterprise" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserAddress_ToTable" Association="Self.FK_UserAddress_ToTable">
+      <End Role="User" EntitySet="User" />
+      <End Role="UserAddress" EntitySet="UserAddress" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

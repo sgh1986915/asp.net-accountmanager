@@ -1,0 +1,71 @@
+﻿@model AccountManager.Models.LoginViewModel
+
+@{
+    ViewBag.Title = "Agritec Log in";
+    Layout = "~/Views/shared/_AvantClean.cshtml";
+}
+
+
+
+<div class="verticalcenter">
+    <a href="~/">
+        <img src="~/Content/Images/logo-agritec-big.png" alt="Logo" class="brand" /></a>
+    <div class="panel panel-primary">
+        @using (Html.BeginForm("Login", "Account",
+                 new { ReturnUrl = ViewBag.ReturnUrl },
+                 FormMethod.Post, new { @class = "form-horizontal", style = "margin-bottom: 0px !important;" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
+
+            <div class="panel-body">
+                <h4 class="text-center" style="margin-bottom: 25px;">Log in to get started or @Html.ActionLink(__("Sign Up"), "Register") @_("if you don't have an account.")</h4>
+
+
+                <div class="form-group">
+                    <div class="col-sm-12">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "E-Mail" })
+                            @*<input type="text" class="form-control" id="UserName" name="UserName" placeholder="Username">*@
+                        </div>
+                        @Html.ValidationMessageFor(m => m.Email, null, new { @class = "has-error" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-12">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                            @*    <input type="password" class="form-control" id="Password" name="Password" placeholder="Password">*@
+                            @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "Password" })
+                        </div>
+                        @Html.ValidationMessageFor(m => m.Password)
+                    </div>
+                </div>
+                <div class="clearfix">
+                    <div class="pull-right">
+                        <label>
+                            @*
+                             @Html.CheckBoxFor(m => m.RememberMe, new {style="margin-bottom: 20px"})
+                             @Html.LabelFor(m => m.RememberMe, new { @class = "checkbox" })
+                             *@
+                            <input type="checkbox" id="RememberMe" style="margin-bottom: 20px" checked="">
+                            @_("Remember Me")
+
+                        </label>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="panel-footer">
+                <a href="extras-forgotpassword.htm" class="pull-left btn btn-link" style="padding-left: 0">@_("Forgot password?")</a>
+
+                <div class="pull-right">
+                    <input type="submit" class="btn btn-primary" value="@_("Log in")" />
+
+                </div>
+            </div>
+             }
+    </div>
+</div>
